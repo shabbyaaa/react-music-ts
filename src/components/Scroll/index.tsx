@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-05-18 20:41:04
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-19 18:16:51
+ * @Last Modified time: 2020-08-19 22:47:20
  * @Description: 滑动组件
  * 滑动组件 需要一个父容器包裹，第一个子元素高度超过父容器，就会滑动
  */
@@ -33,11 +33,6 @@ interface ScrollProps {
   bounceTop?: boolean; //是否支持向上吸顶
   bounceBottom?: boolean; //是否支持向下吸顶
   children: ReactNode;
-}
-
-interface PosData {
-  x: number;
-  y: number;
 }
 
 const Scroll = forwardRef((props: ScrollProps, ref) => {
@@ -107,13 +102,13 @@ const Scroll = forwardRef((props: ScrollProps, ref) => {
 
   useEffect(() => {
     if (!bScroll || !pullDown) return;
-    const handlePullDown = (pos: PosData) => {
+    const handlePullDown = (pos: any) => {
       //判断用户的下拉动作
       if (pos.y > 50) {
         pullDownDebounce();
       }
     };
-    bScroll.on("touchEnd", () => handlePullDown);
+    bScroll.on("touchEnd", handlePullDown);
     return () => {
       bScroll.off("touchEnd", handlePullDown);
     };
