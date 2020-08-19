@@ -1,0 +1,31 @@
+@import '../../../../global.less';
+
+.list {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  overflow: hidden;
+
+  >span:first-of-type {
+    display: block;
+    flex: 0 0 auto;
+    padding: 5px 0;
+    margin-right: 5px;
+    color: grey;
+    font-size: @font-size-m;
+    // vertical-align: middle;
+  }
+
+  .listItem {
+    flex: 0 0 auto;
+    font-size: @font-size-m;
+    padding: 3px 8px;
+    border-radius: 10px;
+
+    &.selected {
+      color: @theme-color;
+      border: 1px solid @theme-color;
+      opacity: 0.8;
+    }
+  }
+}

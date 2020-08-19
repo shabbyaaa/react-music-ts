@@ -1,0 +1,37 @@
+@import '../../global.less';
+
+.sliderWrap {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  background-color: white;
+  .before {
+    position: absolute;
+    top: -300px;
+    height: 400px;
+    width: 100%;
+    background-color: @theme-color;
+  }
+
+  .sliderContainer {
+    position: relative;
+    width: 98%;
+    height: 160px;
+    overflow: hidden;
+    margin: auto;
+    border-radius: 6px;
+
+    .sliderNav {
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: @theme-color;
+  }
+}
