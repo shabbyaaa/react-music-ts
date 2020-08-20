@@ -54,7 +54,7 @@ const renderRouter = (routes: any) => {
             <Route path="/recommend" render={() => <Recommend />} />
             <Route path="/singers" render={() => <Singers />} />
             <Route path="/rank" render={() => <Rank />} />
-            <Redirect to="/singers" />
+            <Redirect to="/rank" />
             {/* <Switch>
               {routes.map((item: RoutesType) => {
                 return (

@@ -2,7 +2,8 @@
  * @Author: Shabby申
  * @Date: 2020-08-19 14:54:41
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-20 16:11:42
+ * @Last Modified time: 2020-08-20 16:26:44
+ * 歌手分类组件
  */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";

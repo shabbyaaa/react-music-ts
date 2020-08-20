@@ -43,7 +43,6 @@ export const getHotSingerList = () => {
 
 //加载更多热门歌手
 export const refreshMoreHotSingerList = (pageCount: number) => {
-  console.log('pageCount', pageCount)
   return (dispatch: Dispatch) => {
     request(`/api/server/top/artists?offset=${pageCount}`, 'POST').then((res: any) => {
       dispatch(changeSingerList([...res.artists]));
