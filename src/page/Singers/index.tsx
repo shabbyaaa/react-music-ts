@@ -2,14 +2,16 @@
  * @Author: Shabby申
  * @Date: 2020-08-19 14:54:41
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-19 23:28:19
+ * @Last Modified time: 2020-08-20 16:11:42
  */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import LazyLoad, { forceCheck } from "react-lazyload";
 import { categoryTypes, alphaTypes } from "../../assets/static";
 import Scroll from "../../components/Scroll";
 import Loading from "../../components/Loading2";
 import Horizen from "./component/HorizonItem";
+import LocalStore from "../../utils/LocalStore";
 import * as actionTypes from "./store/action";
 import { RootState } from "../../store";
 import styles from "./style.less";
@@ -30,21 +32,26 @@ function Singers() {
     pageCount: state.singer.pageCount,
   }));
 
-  let [category, setCategory] = useState("");
-  let [alpha, setAlpha] = useState("");
-
-  let handleUpdateAlpha = (val: string) => {
-    setAlpha(val);
-    updateDispatch(category, val);
-  };
+  // 使用localstorage缓存分类
+  let [category, setCategory] = useState(LocalStore.get("category") || "");
+  let [alpha, setAlpha] = useState(LocalStore.get("alpha") || "");
 
   let handleUpdateCatetory = (val: string) => {
     setCategory(val);
+    LocalStore.set("category", val);
     updateDispatch(val, alpha);
   };
 
+  let handleUpdateAlpha = (val: string) => {
+    setAlpha(val);
+    LocalStore.set("alpha", val);
+    updateDispatch(category, val);
+  };
+
   useEffect(() => {
-    dispatch(actionTypes.getHotSingerList());
+    if (!singerList.length) {
+      dispatch(actionTypes.getHotSingerList());
+    }
   }, []);
 
   // 点击具体分类的处理
@@ -99,12 +106,23 @@ function Singers() {
           return (
             <div className={styles.listItem} key={item.id}>
               <div className={styles.img_wrapper}>
-                <img
-                  src={`${item.picUrl}?param=300x300`}
-                  width="100%"
-                  height="100%"
-                  alt="music"
-                />
+                <LazyLoad
+                  placeholder={
+                    <img
+                      width="100%"
+                      height="100%"
+                      src={require("../../assets/img/singer.png")}
+                      alt="music"
+                    />
+                  }
+                >
+                  <img
+                    src={`${item.picUrl}?param=300x300`}
+                    width="100%"
+                    height="100%"
+                    alt="music"
+                  />
+                </LazyLoad>
               </div>
               <span className={styles.name}>{item.name}</span>
             </div>
@@ -133,6 +151,7 @@ function Singers() {
       <div className={styles.listContainer}>
         {enterLoading ? <Loading /> : null}
         <Scroll
+          onScroll={forceCheck}
           pullUp={handlePullUp}
           pullDown={handlePullDown}
           pullUpLoading={pullUpLoading}
