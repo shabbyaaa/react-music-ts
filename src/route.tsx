@@ -6,7 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import Layout from "./layout";
-import Loading from './components/Loading1'
+import Loading from "./components/Loading1";
 
 const SuspenseComponent = (Component: LazyExoticComponent<any>) => (
   props: any
@@ -19,58 +19,96 @@ const SuspenseComponent = (Component: LazyExoticComponent<any>) => (
 const Recommend = SuspenseComponent(lazy(() => import("./page/Recommend")));
 const Singers = SuspenseComponent(lazy(() => import("./page/Singers")));
 const Rank = SuspenseComponent(lazy(() => import("./page/Rank")));
+const Album = SuspenseComponent(lazy(() => import("./page/Album")));
 
 const routes = [
   {
-    key: "recommend",
-    path: "recommend",
-    component: Recommend,
-  },
-  {
-    key: "singers",
-    path: "singers",
-    component: Singers,
-  },
-  {
-    key: "rank",
-    path: "rank",
-    component: Rank,
+    path: "/",
+    component: Layout,
+    children: [
+      {
+        path: "/recommend",
+        component: Recommend,
+        children: [
+          {
+            path: "/recommend/:id",
+            component: Album,
+          },
+        ],
+      },
+      {
+        path: "/singers",
+        component: Singers,
+      },
+      {
+        path: "/rank",
+        component: Rank,
+      },
+      { path: "/", exact: true, redirect: "/recommend" },
+    ],
   },
 ];
 
-interface RoutesType {
-  key: string;
-  path: string;
-  component: React.FC;
-}
-
-const renderRouter = (routes: any) => {
+const renderRouter = (routers: any) => {
+  if (!Array.isArray(routers)) return null;
   return (
     <Switch>
-      <Route
-        path="/"
-        render={() => (
-          <Layout>
-            <Route path="/recommend" render={() => <Recommend />} />
-            <Route path="/singers" render={() => <Singers />} />
-            <Route path="/rank" render={() => <Rank />} />
-            <Redirect to="/rank" />
-            {/* <Switch>
-              {routes.map((item: RoutesType) => {
+      {routers.map((route, index) => {
+        if (route.redirect) {
+          return (
+            <Redirect
+              key={route.path || index}
+              exact={route.exact}
+              strict={route.strict}
+              from={route.path}
+              to={route.redirect}
+            />
+          );
+        }
+
+        return (
+          <Route
+            key={route.key || index}
+            exact={route.exact}
+            strict={route.exact}
+            path={route.path}
+            render={() => {
+              const renderChildRoutes = renderRouter(route.children);
+              if (route.component) {
                 return (
-                  <Route
-                    path={item.path}
-                    key={item.key}
-                    component={item.component}
-                    // render={() => <item.component />}
-                  />
+                  <route.component route={route}>
+                    {renderChildRoutes}
+                  </route.component>
                 );
-              })}
-            </Switch> */}
-          </Layout>
-        )}
-      ></Route>
+              }
+              return renderChildRoutes;
+            }}
+          />
+        );
+      })}
     </Switch>
+    // <Switch>
+    //   <Route
+    //     path="/"
+    //     render={() => (
+    //       <Layout>
+    //         <Route
+    //           path="/recommend"
+    //           exact
+    //           render={() => (
+    //             <Switch>
+    //               <Route path="/" render={() => <Recommend />} />
+    //               <Route path="/recommend/:id" render={() => <Album />} />
+    //             </Switch>
+    //           )}
+    //         ></Route>
+    //         <Route path="/singers" render={() => <Singers />} />
+    //         <Route path="/rank" render={() => <Rank />} />
+    //         <Redirect to="/recommend" />
+    //       </Layout>
+    //     )}
+    //   ></Route>
+    // </Switch>
   );
 };
 

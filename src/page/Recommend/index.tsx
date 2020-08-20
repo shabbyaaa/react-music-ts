@@ -1,15 +1,16 @@
 import React, { useEffect, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { forceCheck } from "react-lazyload";
+import { withRouter } from "react-router-dom";
 import Slider from "../../components/Slider";
-import List from "../../components/List";
+import List from "./components/List";
 import Scroll from "../../components/Scroll";
 import Loading from "../../components/Loading1";
 import * as actionTypes from "./store/action";
 import { RootState } from "../../store";
 import styles from "./style.less";
 
-const Recommend = () => {
+const Recommend = (props: any) => {
   const dispatch = useDispatch();
   const { bannerList, recommendList, enterLoading } = useSelector(
     (state: RootState) => ({
@@ -36,6 +37,10 @@ const Recommend = () => {
     }
     // eslint-disable-next-line
   }, []);
+
+  const enterDetail = (id: number) => {
+    props.history.push(`/recommend/${id}`);
+  };
   return (
     // scroll 滑动原理 父组件content容器大小必须固定 ，当子元素超过父容器，通过transform动画产生滑动效果
     <div className={styles.content}>
@@ -43,12 +48,13 @@ const Recommend = () => {
         {/* scroll组件只能让第一个子元素滑动，因此加一个div包裹 */}
         <div>
           <Slider bannerList={bannerList} />
-          <List recommendList={recommendList} />
+          <List enterDetail={enterDetail} recommendList={recommendList} />
         </div>
       </Scroll>
       {enterLoading ? <Loading /> : null}
+      {props.children}
     </div>
   );
 };
 
-export default memo(Recommend);
+export default withRouter(React.memo(Recommend));

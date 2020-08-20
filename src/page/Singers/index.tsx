@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-19 14:54:41
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-20 16:26:44
+ * @Last Modified time: 2020-08-20 20:46:33
  * 歌手分类组件
  */
 import React, { useState, useEffect } from "react";
@@ -50,7 +50,10 @@ function Singers() {
   };
 
   useEffect(() => {
-    if (!singerList.length) {
+    // 下次进来如果有缓存的分类，请求对应的
+    if (category !== "" || alpha !== "") {
+      dispatch(actionTypes.getSingerList(category, alpha));
+    } else if (!singerList.length) {
       dispatch(actionTypes.getHotSingerList());
     }
   }, []);
