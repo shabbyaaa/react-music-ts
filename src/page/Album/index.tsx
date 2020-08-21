@@ -14,9 +14,17 @@ function Alibum(props: any) {
     <CSSTransition
       in={showStatus} //值改变会触发动画
       timeout={300} //动画执行多久
-      classNames={styles.fly}
+      classNames={{
+        enter: styles.fadeEnter,
+        appear: styles.fadeAppear,
+        enterActive: styles.fadeEnterActive,
+        appearActive: styles.fadeEnterActive,
+        exit: styles.fadeExit,
+        exitActive: styles.fadeExitActive,
+      }}
       appear={true} //第一次显示需要动画
       unmountOnExit //dom会被移除
+      // 退出动画执行结束时跳转路由。
       onExited={props.history.goBack}
     >
       <div className={styles.Container}>
