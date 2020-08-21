@@ -10,7 +10,7 @@ interface ISingerListType {
 
 export type ISingerList = ISingerListType[];
 
-export interface SingerStateType {
+export interface SingersStateType {
   singerList: ISingerList;
   enterLoading: boolean;
   pullUpLoading: boolean;
@@ -18,7 +18,7 @@ export interface SingerStateType {
   pageCount: number;
 }
 
-const defaultState: SingerStateType = {
+const defaultState: SingersStateType = {
   singerList: [],
   enterLoading: true,     //控制进场Loading
   pullUpLoading: false,   //控制上拉加载动画
@@ -26,7 +26,7 @@ const defaultState: SingerStateType = {
   pageCount: 0            //这里是当前页数，我们即将实现分页功能
 }
 
-export const singerReducer = produce((state, action: AnyAction) => {
+export const singersReducer = produce((state, action: AnyAction) => {
   switch (action.type) {
     case actionTypes.CHANGE_SINGER_LIST:
       state.singerList = action.data;

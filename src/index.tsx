@@ -12,11 +12,11 @@ import "./index.less";
 // FastClick.attach(document.body);
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={Store}>
       <RouterConfig />
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
+  // </React.StrictMode>
   document.getElementById("root")
 );
 

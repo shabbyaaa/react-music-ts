@@ -20,6 +20,7 @@ const Recommend = SuspenseComponent(lazy(() => import("./page/Recommend")));
 const Singers = SuspenseComponent(lazy(() => import("./page/Singers")));
 const Rank = SuspenseComponent(lazy(() => import("./page/Rank")));
 const Album = SuspenseComponent(lazy(() => import("./page/Album")));
+const Singer = SuspenseComponent(lazy(() => import("./page/Singer")));
 
 const routes = [
   {
@@ -39,10 +40,22 @@ const routes = [
       {
         path: "/singers",
         component: Singers,
+        children: [
+          {
+            path: "/singers/:id",
+            component: Singer,
+          },
+        ],
       },
       {
         path: "/rank",
         component: Rank,
+        children: [
+          {
+            path: "/rank/:id",
+            component: Album,
+          },
+        ],
       },
       { path: "/", exact: true, redirect: "/recommend" },
     ],

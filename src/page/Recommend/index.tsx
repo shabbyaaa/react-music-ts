@@ -43,17 +43,19 @@ const Recommend = (props: any) => {
   };
   return (
     // scroll 滑动原理 父组件content容器大小必须固定 ，当子元素超过父容器，通过transform动画产生滑动效果
-    <div className={styles.content}>
-      <Scroll onScroll={forceCheck}>
-        {/* scroll组件只能让第一个子元素滑动，因此加一个div包裹 */}
-        <div>
-          <Slider bannerList={bannerList} />
-          <List enterDetail={enterDetail} recommendList={recommendList} />
-        </div>
-      </Scroll>
-      {enterLoading ? <Loading /> : null}
+    <>
+      <div className={styles.content}>
+        <Scroll onScroll={forceCheck}>
+          {/* scroll组件只能让第一个子元素滑动，因此加一个div包裹 */}
+          <div>
+            <Slider bannerList={bannerList} />
+            <List enterDetail={enterDetail} recommendList={recommendList} />
+          </div>
+        </Scroll>
+        {enterLoading ? <Loading /> : null}
+      </div>
       {props.children}
-    </div>
+    </>
   );
 };
 

@@ -1,13 +1,18 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import * as recommend from './page/Recommend/store/reducer';
-import * as singer from './page/Singers/store/reducer';
+import * as singers from './page/Singers/store/reducer';
 import * as rank from './page/Rank/store/reducer';
+import * as album from './page/Album/store/reducer';
+import * as singer from './page/Singer/store/reducer';
+
 
 const Reducer = combineReducers({
   recommend: recommend.recommendReducer,
-  singer: singer.singerReducer,
+  singers: singers.singersReducer,
   rank: rank.rankReducer,
+  album: album.albumReducer,
+  singer: singer.singerReducer,
 });
 
 type windowWithReduxExtension = Window & typeof globalThis & {
@@ -30,6 +35,8 @@ export const Store = createStore(
 
 export interface RootState {
   recommend: recommend.RecommendStateType,
-  singer: singer.SingerStateType,
+  singers: singers.SingersStateType,
   rank: rank.RankStateType,
+  album: album.AlbumStateType,
+  singer: singer.SingerStateType,
 }

@@ -1,11 +1,12 @@
 /*
- * @Author: Shabby申 
- * @Date: 2020-08-20 18:10:09 
+ * @Author: Shabby申
+ * @Date: 2020-08-20 18:10:09
  * @Last Modified by: Shabby申
  * @Last Modified time: 2020-08-20 18:12:33
  * 排行榜页面
  */
 import React, { useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import * as actionTypes from "./store/action";
@@ -21,7 +22,7 @@ function filterIndex(rankList: any) {
   }
 }
 
-function Rank() {
+function Rank(props: any) {
   const dispatch = useDispatch();
 
   const { rankList, loading } = useSelector((state: RootState) => ({
@@ -32,6 +33,10 @@ function Rank() {
   useEffect(() => {
     dispatch(actionTypes.getRankList());
   }, []);
+
+  const enterDetail = (detail: any) => {
+    props.history.push(`/rank/${detail.id}`);
+  };
 
   let globalStartIndex = filterIndex(rankList);
   let officialList = rankList.slice(0, globalStartIndex);
@@ -46,7 +51,7 @@ function Rank() {
               className={styles.ListItem}
               key={item.id}
               style={{ display: item.tracks.length ? "flex" : "" }}
-              // onClick={() => enterDetail(item.name)}
+              onClick={() => enterDetail(item)}
             >
               <div
                 className={styles.img_wrapper}
@@ -84,27 +89,30 @@ function Rank() {
   };
 
   return (
-    <div className={styles.Container}>
-      <Scroll>
-        <div>
-          <h1
-            className={styles.offical}
-            style={{ display: loading ? "none" : "" }}
-          >
-            官方榜
-          </h1>
-          {renderRankList(officialList)}
-          <h1
-            className={styles.global}
-            style={{ display: loading ? "none" : "" }}
-          >
-            全球榜
-          </h1>
-          {renderRankList(globalList, true)}
-        </div>
-      </Scroll>
-    </div>
+    <>
+      <div className={styles.Container}>
+        <Scroll>
+          <div>
+            <h1
+              className={styles.offical}
+              style={{ display: loading ? "none" : "" }}
+            >
+              官方榜
+            </h1>
+            {renderRankList(officialList)}
+            <h1
+              className={styles.global}
+              style={{ display: loading ? "none" : "" }}
+            >
+              全球榜
+            </h1>
+            {renderRankList(globalList, true)}
+          </div>
+        </Scroll>
+      </div>
+      {props.children}
+    </>
   );
 }
 
-export default React.memo(Rank);
+export default withRouter(React.memo(Rank));

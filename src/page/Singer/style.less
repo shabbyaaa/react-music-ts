@@ -1,0 +1,125 @@
+@import '../../global.less';
+
+
+.fadeEnter,
+.fadeAppear {
+  transform: rotateZ(30deg) translate3d(100%, 0, 0);
+}
+
+.fadeEnterActive,
+.fadeAppearActive {
+  transition: transform .3s;
+  transform: rotateZ(0deg) translate3d(0, 0, 0);
+}
+
+.fadeExit {
+  transform: rotateZ(0deg) translate3d(0, 0, 0);
+}
+
+.fadeExitActive {
+  transition: transform .3s;
+  transform: rotateZ(30deg) translate3d(100%, 0, 0);
+}
+
+.Container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // bottom: ${props => props.play > 0 ? "60px": 0};
+  width: 100%;
+  z-index: 100;
+  overflow: hidden;
+  background: @background-color;
+  transform-origin: right bottom;
+
+  .Loading {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    z-index: 100;
+  }
+
+  .ImgWrapper {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 75%;
+    transform-origin: top;
+    background-size: cover;
+    z-index: 50;
+
+    .filter {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 17, 27, 0.3);
+    }
+  }
+
+  .CollectButton {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    box-sizing: border-box;
+    width: 120px;
+    height: 40px;
+    margin-top: -55px;
+    z-index: 50;
+    background: @theme-color;
+    color: @font-color-light;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 0;
+    line-height: 40px;
+
+    .iconfont {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 12px;
+      vertical-align: 1px;
+    }
+
+    .text {
+      display: inline-block;
+      font-size: 14px;
+      letter-spacing: 5px;
+    }
+  }
+
+  // 白色背景遮罩
+  .BgLayer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    z-index: 50;
+  }
+
+  .SongListWrapper {
+    position: absolute;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    >div {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: visible;
+    }
+  }
+}

@@ -2,12 +2,13 @@
  * @Author: Shabby申
  * @Date: 2020-08-19 14:54:41
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-20 20:46:33
+ * @Last Modified time: 2020-08-21 23:19:54
  * 歌手分类组件
  */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import LazyLoad, { forceCheck } from "react-lazyload";
+import { withRouter } from "react-router-dom";
 import { categoryTypes, alphaTypes } from "../../assets/static";
 import Scroll from "../../components/Scroll";
 import Loading from "../../components/Loading2";
@@ -17,7 +18,7 @@ import * as actionTypes from "./store/action";
 import { RootState } from "../../store";
 import styles from "./style.less";
 
-function Singers() {
+function Singers(props: any) {
   const dispatch = useDispatch();
   const {
     singerList,
@@ -26,11 +27,11 @@ function Singers() {
     pullDownLoading,
     pageCount,
   } = useSelector((state: RootState) => ({
-    singerList: state.singer.singerList,
-    enterLoading: state.singer.enterLoading,
-    pullUpLoading: state.singer.pullUpLoading,
-    pullDownLoading: state.singer.pullDownLoading,
-    pageCount: state.singer.pageCount,
+    singerList: state.singers.singerList,
+    enterLoading: state.singers.enterLoading,
+    pullUpLoading: state.singers.pullUpLoading,
+    pullDownLoading: state.singers.pullDownLoading,
+    pageCount: state.singers.pageCount,
   }));
 
   // 使用localstorage缓存分类
@@ -103,12 +104,20 @@ function Singers() {
     pullDownRefreshDispatch(category, alpha);
   };
 
+  const enterDetail = (id: number) => {
+    props.history.push(`/singers/${id}`);
+  };
+
   const renderSingerList = () => {
     return (
       <div className={styles.list}>
-        {singerList.map((item) => {
+        {singerList.map((item: any) => {
           return (
-            <div className={styles.listItem} key={item.id}>
+            <div
+              className={styles.listItem}
+              key={item.id}
+              onClick={() => enterDetail(item.id)}
+            >
               <div className={styles.img_wrapper}>
                 <LazyLoad
                   placeholder={
@@ -164,8 +173,9 @@ function Singers() {
           {renderSingerList()}
         </Scroll>
       </div>
+      {props.children}
     </>
   );
 }
 
-export default React.memo(Singers);
+export default withRouter(memo(Singers));
