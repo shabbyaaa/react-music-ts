@@ -2,17 +2,16 @@
  * @Author: Shabby申
  * @Date: 2020-05-17 12:38:17
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-19 18:13:44
+ * @Last Modified time: 2020-08-22 11:25:10
  * @description: 布局样式
  */
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { NavLink, withRouter, RouteComponentProps } from "react-router-dom";
 import { MyIcon } from "../utils/request";
-// import "./style.less";
-import styles from './style.less';
+import styles from "./style.less";
+import Player from "../page/Player";
 
 class BasicLayout extends Component<RouteComponentProps> {
-
   render() {
     return (
       <div>
@@ -36,6 +35,7 @@ class BasicLayout extends Component<RouteComponentProps> {
             排行榜
           </NavLink>
         </div>
+        <Player />
         {this.props.children}
       </div>
     );

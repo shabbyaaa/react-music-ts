@@ -1,0 +1,20 @@
+@import '../../global.less';
+
+.CircleWrapper {
+  position: relative;
+
+  circle {
+    stroke-width: 8px;
+    transform-origin: center;
+
+    &.progressBackground {
+      transform: scale(0.9);
+      stroke: @theme-color-shadow;
+    }
+
+    &.progressBar {
+      transform: scale(0.9) rotate(-90deg);
+      stroke: @theme-color;
+    }
+  }
+}
