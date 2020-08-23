@@ -2,22 +2,45 @@
  * @Author: Shabby申
  * @Date: 2020-08-21 20:35:46
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-21 23:40:04
+ * @Last Modified time: 2020-08-23 22:35:42
  * 歌曲列表
  */
 import React, { forwardRef, memo } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { getName, getCount } from "../../utils/utils";
 import { MyIcon } from "../../utils/request";
+import { RootState } from "../../store";
+import * as actionTypes from "../../page/Player/store/action";
 import styles from "./style.less";
 
 const SongsList = forwardRef((props: any, refs) => {
+  const dispatch = useDispatch();
+
+  const {} = useSelector((state: RootState) => ({}));
+
+  // 接受触发动画的函数
+  const { musicAnimation, showBackground } = props;
+
+  const selectItem = (e: any, index: number) => {
+    changePlayListDispatch(songs);
+    changeSequecePlayListDispatch(songs);
+    changeCurrentIndexDispatch(index);
+    musicAnimation(e.nativeEvent.clientX, e.nativeEvent.clientY);
+  };
+
+  const changePlayListDispatch = (data: any) => {
+    dispatch(actionTypes.changePlayList(data));
+  };
+  const changeCurrentIndexDispatch = (data: number) => {
+    dispatch(actionTypes.changeCurrentIndex(data));
+  };
+  const changeSequecePlayListDispatch = (data: any) => {
+    dispatch(actionTypes.changeSequecePlayList(data));
+  };
+
   const { collectCount, showCollect, songs } = props;
 
   const totalCount = songs.length;
-
-  const selectItem = (e: any, index: number) => {
-    console.log(index);
-  };
 
   let songList = (list: any) => {
     let res = [];
@@ -53,8 +76,7 @@ const SongsList = forwardRef((props: any, refs) => {
     <div
       className={styles.SongList}
       ref={refs as any}
-      // style={{background: }}
-      // showBackground={props.showBackground}
+      style={{ background: showBackground ? "#fff" : "" }}
     >
       <div className={styles.first_line}>
         <div className={styles.play_all} onClick={(e) => selectItem(e, 0)}>

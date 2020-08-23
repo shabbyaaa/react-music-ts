@@ -6,12 +6,12 @@ import { playMode } from '../../../utils/utils'
 export interface PlayerStateType {
   fullScreen: boolean,
   playing: boolean,
-  sequencePlayList: [],
-  playList: [],
+  sequencePlayList: any,
+  playList: any,
   mode: number,
   currentIndex: number,
   showPlayList: boolean,
-  currentSong: {},
+  currentSong: any,
   speed: number
 }
 

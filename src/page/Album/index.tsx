@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-21 13:01:42
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-21 23:33:23
+ * @Last Modified time: 2020-08-23 23:24:00
  * 具体歌单页面
  */
 import React, { memo, useState, useRef, useEffect, useCallback } from "react";
@@ -17,14 +17,18 @@ import Scroll from "../../components/Scroll";
 import Loading from "../../components/Loading1";
 import Header from "../../components/Header";
 import SongsList from "../../components/SongList";
+import MusicNote from "../../components/MusicNote";
 import styles from "./style.less";
 
 function Alibum(props: any) {
   const dispatch = useDispatch();
-  const { currentAlbum, enterLoading } = useSelector((state: RootState) => ({
-    currentAlbum: state.album.currentAlbum,
-    enterLoading: state.album.enterLoading,
-  }));
+  const { currentAlbum, enterLoading, playList } = useSelector(
+    (state: RootState) => ({
+      currentAlbum: state.album.currentAlbum,
+      enterLoading: state.album.enterLoading,
+      playList: state.player.playList,
+    })
+  );
 
   const [showStatus, setShowStatus] = useState(true);
   const [title, setTitle] = useState("歌单");
@@ -62,6 +66,11 @@ function Alibum(props: any) {
     },
     [currentAlbum]
   );
+
+  const musicNoteRef = useRef<any>(null);
+  const musicAnimation = (x: number, y: number) => {
+    musicNoteRef.current!.startAnimation({ x, y });
+  };
 
   const renderTopDesc = () => (
     <div className={styles.TopDesc}>
@@ -134,7 +143,10 @@ function Alibum(props: any) {
       // 退出动画执行结束时跳转路由。
       onExited={props.history.goBack}
     >
-      <div className={styles.Container}>
+      <div
+        className={styles.Container}
+        style={{ bottom: playList.length ? "60px" : "0px" }}
+      >
         {enterLoading ? <Loading></Loading> : null}
         <Header
           ref={headerEl}
@@ -151,10 +163,13 @@ function Alibum(props: any) {
                 songs={currentAlbum.tracks}
                 collectCount={currentAlbum.subscribedCount}
                 showCollect={true}
+                showBackground={true}
+                musicAnimation={musicAnimation}
               />
             </div>
           </Scroll>
         ) : null}
+        <MusicNote ref={musicNoteRef}></MusicNote>
       </div>
     </CSSTransition>
   );

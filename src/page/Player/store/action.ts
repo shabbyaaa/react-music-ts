@@ -23,7 +23,7 @@ export const changeSequecePlayList = (data: any) => ({
   data: data
 });
 
-export const changePlayList  = (data: boolean) => ({
+export const changePlayList  = (data: any) => ({
   type: actionTypes.SET_PLAYLIST,
   data: data
 });

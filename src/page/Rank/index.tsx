@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-20 18:10:09
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-20 18:12:33
+ * @Last Modified time: 2020-08-23 23:20:31
  * 排行榜页面
  */
 import React, { useEffect } from "react";
@@ -25,9 +25,10 @@ function filterIndex(rankList: any) {
 function Rank(props: any) {
   const dispatch = useDispatch();
 
-  const { rankList, loading } = useSelector((state: RootState) => ({
+  const { rankList, loading, playList } = useSelector((state: RootState) => ({
     rankList: state.rank.rankList,
     loading: state.rank.loading,
+    playList: state.player.playList,
   }));
 
   useEffect(() => {
@@ -90,7 +91,10 @@ function Rank(props: any) {
 
   return (
     <>
-      <div className={styles.Container}>
+      <div
+        className={styles.Container}
+        style={{ bottom: playList.length ? "60px" : "0px" }}
+      >
         <Scroll>
           <div>
             <h1

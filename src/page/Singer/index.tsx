@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-21 19:59:30
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-21 23:47:09
+ * @Last Modified time: 2020-08-23 23:18:33
  * 具体歌手页面
  */
 import React, { useState, memo, useCallback, useRef, useEffect } from "react";
@@ -16,18 +16,24 @@ import { HEADER_HEIGHT, isEmptyObject } from "../../utils/utils";
 import { RootState } from "../../store";
 import Scroll from "../../components/Scroll";
 import SongsList from "../../components/SongList";
+import MusicNote from "../../components/MusicNote";
 import * as actionTypes from "./store/action";
 import styles from "./style.less";
 
 function Singer(props: any) {
   const dispatch = useDispatch();
-  const { artist, songsOfArtist, loading } = useSelector(
+  const { artist, songsOfArtist, loading, playList } = useSelector(
     (state: RootState) => ({
       artist: state.singer.artist,
       songsOfArtist: state.singer.songsOfArtist,
       loading: state.singer.loading,
+      playList: state.player.playList,
     })
   );
+  const musicNoteRef = useRef<any>(null);
+  const musicAnimation = (x: number, y: number) => {
+    musicNoteRef.current!.startAnimation({ x, y });
+  };
 
   const [showStatus, setShowStatus] = useState(true);
   const header = useRef<HTMLElement | null>(null);
@@ -36,6 +42,7 @@ function Singer(props: any) {
   const songScrollWrapper = useRef<HTMLDivElement | null>(null);
   const songScroll = useRef<any | null>(null);
   const layer = useRef<HTMLDivElement | null>(null);
+
   // 图片初始高度
   const initialHeight = useRef(0);
 
@@ -116,7 +123,10 @@ function Singer(props: any) {
       unmountOnExit
       onExited={() => props.history.goBack()}
     >
-      <div className={styles.Container}>
+      <div
+        className={styles.Container}
+        style={{ bottom: playList.length ? "60px" : "0px" }}
+      >
         {loading ? (
           <div className={styles.Loading}>
             <Loading />
@@ -148,11 +158,16 @@ function Singer(props: any) {
           <Scroll onScroll={handleScroll} ref={songScroll}>
             <div>
               {!isEmptyObject(songsOfArtist) ? (
-                <SongsList songs={songsOfArtist} showCollect={false} />
+                <SongsList
+                  songs={songsOfArtist}
+                  showCollect={false}
+                  musicAnimation={musicAnimation}
+                />
               ) : null}
             </div>
           </Scroll>
         </div>
+        <MusicNote ref={musicNoteRef}></MusicNote>
       </div>
     </CSSTransition>
   );

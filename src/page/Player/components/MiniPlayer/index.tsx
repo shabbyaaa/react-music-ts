@@ -6,11 +6,25 @@ import ProgressCircle from "../../../../components/ProgressCircle";
 import styles from "./style.less";
 
 function MiniPlayer(props: any) {
-  const { song, fullScreen, toggleFullScreen } = props;
+  const {
+    song,
+    fullScreen,
+    toggleFullScreen,
+    playing,
+    percent,
+    clickPlaying,
+    setFullScreen,
+    togglePlayList,
+  } = props;
 
   const miniPlayerRef = useRef<HTMLDivElement | null>(null);
 
-  let percent = 0.2;
+  const handleTogglePlayList = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    togglePlayList(true);
+    e.stopPropagation();
+  };
 
   return (
     <CSSTransition
@@ -36,7 +50,7 @@ function MiniPlayer(props: any) {
         <div className={styles.icon}>
           <div className={styles.imgWrapper}>
             <img
-              className={styles.play}
+              className={`${styles.play} ${playing ? "" : styles.pause}`}
               src={song.al.picUrl}
               width="40"
               height="40"
@@ -51,11 +65,23 @@ function MiniPlayer(props: any) {
         <div className={styles.control}>
           <ProgressCircle radius={32} percent={percent}>
             <span>
-              <MyIcon type="iconzanting" className={`${styles.iconMini} ${styles.iconfont} ${styles.iconPause}`} />
+              {playing ? (
+                <MyIcon
+                  type="iconbofang"
+                  className={`${styles.iconMini} ${styles.iconfont} ${styles.iconPause}`}
+                  onClick={(e) => clickPlaying(e, false)}
+                />
+              ) : (
+                <MyIcon
+                  type="iconzanting"
+                  className={`${styles.iconMini} ${styles.iconfont} ${styles.iconPause}`}
+                  onClick={(e) => clickPlaying(e, true)}
+                />
+              )}
             </span>
           </ProgressCircle>
         </div>
-        <div className={styles.control}>
+        <div className={styles.control} onClick={handleTogglePlayList}>
           <MyIcon type="iconyinleliebiao-" className={styles.iconfont} />
         </div>
       </div>

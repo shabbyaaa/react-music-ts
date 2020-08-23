@@ -1,0 +1,35 @@
+@import "../../../../global.less";
+
+.PlayListWrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  background-color: @background-color-shadow;
+
+  .list_wrapper {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: 1;
+    border-radius: 10px 10px 0 0;
+    background-color: @highlight-background-color;
+    transform: translate3d(0, 0, 0);
+
+    .list_close {
+      text-align: center;
+      line-height: 50px;
+      background: @background-color;
+      font-size: @font-size-l;
+      color: @font-color-desc;
+    }
+  }
+
+  .ScrollWrapper {
+    height: 400px;
+    overflow: hidden;
+  }
+}

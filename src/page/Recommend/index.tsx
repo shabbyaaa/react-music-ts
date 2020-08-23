@@ -12,11 +12,12 @@ import styles from "./style.less";
 
 const Recommend = (props: any) => {
   const dispatch = useDispatch();
-  const { bannerList, recommendList, enterLoading } = useSelector(
+  const { bannerList, recommendList, enterLoading, playList } = useSelector(
     (state: RootState) => ({
       bannerList: state.recommend.bannerList,
       recommendList: state.recommend.recommendList,
       enterLoading: state.recommend.enterLoading,
+      playList: state.player.playList,
     })
   );
 
@@ -44,7 +45,10 @@ const Recommend = (props: any) => {
   return (
     // scroll 滑动原理 父组件content容器大小必须固定 ，当子元素超过父容器，通过transform动画产生滑动效果
     <>
-      <div className={styles.content}>
+      <div
+        className={styles.content}
+        style={{ bottom: playList.length ? "60px" : "0px" }}
+      >
         <Scroll onScroll={forceCheck}>
           {/* scroll组件只能让第一个子元素滑动，因此加一个div包裹 */}
           <div>

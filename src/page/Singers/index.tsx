@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-19 14:54:41
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-21 23:19:54
+ * @Last Modified time: 2020-08-23 23:19:52
  * 歌手分类组件
  */
 import React, { useState, useEffect, memo } from "react";
@@ -26,12 +26,14 @@ function Singers(props: any) {
     pullUpLoading,
     pullDownLoading,
     pageCount,
+    playList,
   } = useSelector((state: RootState) => ({
     singerList: state.singers.singerList,
     enterLoading: state.singers.enterLoading,
     pullUpLoading: state.singers.pullUpLoading,
     pullDownLoading: state.singers.pullDownLoading,
     pageCount: state.singers.pageCount,
+    playList: state.player.playList,
   }));
 
   // 使用localstorage缓存分类
@@ -161,7 +163,10 @@ function Singers(props: any) {
           oldVal={alpha}
         ></Horizen>
       </div>
-      <div className={styles.listContainer}>
+      <div
+        className={styles.listContainer}
+        style={{ bottom: playList.length ? "60px" : "0px" }}
+      >
         {enterLoading ? <Loading /> : null}
         <Scroll
           onScroll={forceCheck}
