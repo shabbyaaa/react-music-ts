@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-05-17 12:38:17
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-22 11:25:10
+ * @Last Modified time: 2020-08-24 21:30:28
  * @description: 布局样式
  */
 import React, { Component } from "react";
@@ -12,6 +12,9 @@ import styles from "./style.less";
 import Player from "../page/Player";
 
 class BasicLayout extends Component<RouteComponentProps> {
+  constructor(props: any) {
+    super(props);
+  }
   render() {
     return (
       <div>
@@ -21,7 +24,11 @@ class BasicLayout extends Component<RouteComponentProps> {
           </span>
           <span>云音乐</span>
           <span>
-            <MyIcon type="iconsearch" className={styles.iconfont} />
+            <MyIcon
+              onClick={() => this.props.history.push("/search")}
+              type="iconsearch"
+              className={styles.iconfont}
+            />
           </span>
         </div>
         <div className={styles.tabWrap}>

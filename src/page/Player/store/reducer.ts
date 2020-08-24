@@ -44,6 +44,44 @@ const handleDeleteSong = (state: any, song: any) => {
   state.currentIndex = currentIndex;
 }
 
+const handleInsertSong = (state: any, song: any) => {
+  const playList = JSON.parse(JSON.stringify(state.playList));
+  const sequenceList = JSON.parse(JSON.stringify(state.sequencePlayList));
+  let currentIndex = state.currentIndex;
+  //看看有没有同款
+  let fpIndex = findIndex(song, playList);
+  // 如果是当前歌曲直接不处理
+  if (fpIndex === currentIndex && currentIndex !== -1) return;
+  currentIndex++;
+  // 把歌放进去,放到当前播放曲目的下一个位置
+  playList.splice(currentIndex, 0, song);
+  // 如果列表中已经存在要添加的歌
+  if (fpIndex > -1) {
+    if (currentIndex > fpIndex) {
+      playList.splice(fpIndex, 1);
+      currentIndex--;
+    } else {
+      playList.splice(fpIndex + 1, 1);
+    }
+  }
+
+  let sequenceIndex = findIndex(playList[currentIndex], sequenceList) + 1;
+  let fsIndex = findIndex(song, sequenceList);
+  sequenceList.splice(sequenceIndex, 0, song);
+  if (fsIndex > -1) {
+    if (sequenceIndex > fsIndex) {
+      sequenceList.splice(fsIndex, 1);
+      sequenceIndex--;
+    } else {
+      sequenceList.splice(fsIndex + 1, 1);
+    }
+  }
+
+  state.playList = playList;
+  state.sequencePlayList = sequenceList;
+  state.currentIndex = currentIndex;
+};
+
 export const playerReducer = produce((state, action: AnyAction) => {
   switch (action.type) {
     case actionTypes.SET_CURRENT_SONG:
@@ -72,6 +110,8 @@ export const playerReducer = produce((state, action: AnyAction) => {
       break;
     case actionTypes.DELETE_SONG:
       return handleDeleteSong(state, action.data);
+    case actionTypes.INSERT_SONG:
+      return handleInsertSong(state, action.data);
     default:
       return state;
   }

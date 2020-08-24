@@ -48,7 +48,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 1500;
+  z-index: 1001;
   background: @background-color;
 
   .background {
@@ -163,38 +163,40 @@
     }
   }
 
-  .ProgressWrapper {
-    display: flex;
-    align-items: center;
-    width: 80%;
-    margin: 0px auto;
-    padding: 10px 0;
 
-    .time {
-      color: @font-color-desc;
-      font-size: @font-size-s;
-      flex: 0 0 30px;
-      line-height: 30px;
-      width: 30px;
-
-      &.timeL {
-        text-align: left;
-      }
-
-      &.timeR {
-        text-align: right;
-      }
-    }
-
-    .progressBarWrapper {
-      flex: 1;
-    }
-  }
 
   .Bottom {
     position: absolute;
     bottom: 50px;
     width: 100%;
+
+    .ProgressWrapper {
+      display: flex;
+      align-items: center;
+      width: 80%;
+      margin: 0px auto;
+      padding: 10px 0;
+
+      .time {
+        color: @font-color-desc;
+        font-size: @font-size-s;
+        flex: 0 0 30px;
+        line-height: 30px;
+        width: 30px;
+
+        &.timeL {
+          text-align: left;
+        }
+
+        &.timeR {
+          text-align: right;
+        }
+      }
+
+      .progressBarWrapper {
+        flex: 1;
+      }
+    }
 
     .Operators {
       display: flex;

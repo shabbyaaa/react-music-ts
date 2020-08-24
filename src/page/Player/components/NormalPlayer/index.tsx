@@ -157,22 +157,23 @@ function NormalPlayer(props: any) {
           </div>
         </div>
 
-        <div className={styles.ProgressWrapper}>
-          <span className={`${styles.time} ${styles.timeL}`}>
-            {formatPlayTime(currentTime)}
-          </span>
-          <div className={styles.progressBarWrapper}>
-            <ProgressBar
-              percent={percent}
-              percentChange={onProgressChange}
-            ></ProgressBar>
-          </div>
-          <div className={`${styles.time} ${styles.timeR}`}>
-            {formatPlayTime(duration)}
-          </div>
-        </div>
-
         <div className={styles.Bottom}>
+          {/* 播放进度 */}
+          <div className={styles.ProgressWrapper}>
+            <span className={`${styles.time} ${styles.timeL}`}>
+              {formatPlayTime(currentTime)}
+            </span>
+            <div className={styles.progressBarWrapper}>
+              <ProgressBar
+                percent={percent}
+                percentChange={onProgressChange}
+              ></ProgressBar>
+            </div>
+            <div className={`${styles.time} ${styles.timeR}`}>
+              {formatPlayTime(duration)}
+            </div>
+          </div>
+
           <div className={styles.Operators}>
             <div
               onClick={changeMode}

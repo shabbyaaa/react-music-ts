@@ -21,6 +21,7 @@ const Singers = SuspenseComponent(lazy(() => import("./page/Singers")));
 const Rank = SuspenseComponent(lazy(() => import("./page/Rank")));
 const Album = SuspenseComponent(lazy(() => import("./page/Album")));
 const Singer = SuspenseComponent(lazy(() => import("./page/Singer")));
+const Search = SuspenseComponent(lazy(() => import("./page/Search")));
 
 const routes = [
   {
@@ -56,6 +57,15 @@ const routes = [
             component: Album,
           },
         ],
+      },
+      {
+        path: "/search",
+        component: Search,
+      },
+      // 增加 album 路由，用来显示歌单
+      {
+        path: "/album/:id",
+        component: Album,
       },
       { path: "/", exact: true, redirect: "/recommend" },
     ],

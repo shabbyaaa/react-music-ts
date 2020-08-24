@@ -6,6 +6,7 @@ import * as rank from './page/Rank/store/reducer';
 import * as album from './page/Album/store/reducer';
 import * as singer from './page/Singer/store/reducer';
 import * as player from './page/Player/store/reducer';
+import * as search from './page/Search/store/reducer';
 
 
 const Reducer = combineReducers({
@@ -15,6 +16,7 @@ const Reducer = combineReducers({
   album: album.albumReducer,
   singer: singer.singerReducer,
   player: player.playerReducer,
+  search: search.searchReducer,
 });
 
 type windowWithReduxExtension = Window & typeof globalThis & {
@@ -42,4 +44,5 @@ export interface RootState {
   album: album.AlbumStateType,
   singer: singer.SingerStateType,
   player: player.PlayerStateType,
+  search: search.SerachStateType,
 }

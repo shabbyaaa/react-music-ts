@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-22 11:10:24
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-24 17:10:46
+ * @Last Modified time: 2020-08-24 22:31:34
  * 播放器组件
  */
 import React, { useState, memo, useRef, useEffect } from "react";
@@ -15,11 +15,13 @@ import {
   shuffle,
   findIndex,
 } from "../../utils/utils";
+import request from "../../utils/request";
 import * as actionTypes from "./store/action";
 import MiniPlayer from "./components/MiniPlayer";
 import NormalPlayer from "./components/NormalPlayer";
 import PlayList from "./components/PlayList";
 import Toast from "../../components/Toast";
+import { fromPairs } from "lodash";
 
 interface IProps {
   fullScreen?: boolean; // 播放器是否为全屏模式
@@ -57,6 +59,7 @@ function Player() {
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const songReady = useRef(true);
+  const currentLyric = useRef<any>(null);
 
   //目前播放时间
   const [currentTime, setCurrentTime] = useState(0);
@@ -106,10 +109,27 @@ function Player() {
       });
     });
     togglePlayingDispatch(true); //播放状态
+    getLyric(current.id); //获取歌词
     setCurrentTime(0); //从头开始播放
     setDuration((current.dt / 1000) | 0); //时长
     // eslint-disable-next-line
   }, [playList, currentIndex]);
+
+  const getLyric = (id: number) => {
+    let lyric = "";
+    request(`/api/server/lyric?id=${id}`, "POST")
+      .then((res: any) => {
+        lyric = res.lrc.lyric;
+        if (!lyric) {
+          currentLyric.current! = null;
+          return;
+        }
+      })
+      .catch(() => {
+        songReady.current = true;
+        audioRef.current!.play();
+      });
+  };
 
   const updateTime = (e: any) => {
     setCurrentTime(e.target.currentTime);
