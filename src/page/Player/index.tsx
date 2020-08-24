@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-22 11:10:24
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-23 23:38:54
+ * @Last Modified time: 2020-08-24 17:10:46
  * 播放器组件
  */
 import React, { useState, memo, useRef, useEffect } from "react";
@@ -18,6 +18,7 @@ import {
 import * as actionTypes from "./store/action";
 import MiniPlayer from "./components/MiniPlayer";
 import NormalPlayer from "./components/NormalPlayer";
+import PlayList from "./components/PlayList";
 import Toast from "../../components/Toast";
 
 interface IProps {
@@ -38,7 +39,7 @@ function Player() {
     fullScreen,
     playing,
     currentSong,
-    showPlayList,
+    // showPlayList,
     mode,
     currentIndex,
     playList,
@@ -47,7 +48,7 @@ function Player() {
     fullScreen: state.player.fullScreen,
     playing: state.player.playing,
     currentSong: state.player.currentSong,
-    showPlayList: state.player.showPlayList,
+    // showPlayList: state.player.showPlayList,
     mode: state.player.mode,
     currentIndex: state.player.currentIndex,
     playList: state.player.playList,
@@ -107,6 +108,7 @@ function Player() {
     togglePlayingDispatch(true); //播放状态
     setCurrentTime(0); //从头开始播放
     setDuration((current.dt / 1000) | 0); //时长
+    // eslint-disable-next-line
   }, [playList, currentIndex]);
 
   const updateTime = (e: any) => {
@@ -251,6 +253,7 @@ function Player() {
           togglePlayList={togglePlayListDispatch}
         />
       )}
+      <PlayList />
       <audio
         onTimeUpdate={updateTime}
         ref={audioRef}

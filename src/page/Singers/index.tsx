@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-19 14:54:41
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-23 23:19:52
+ * @Last Modified time: 2020-08-24 17:09:48
  * 歌手分类组件
  */
 import React, { useState, useEffect, memo } from "react";
@@ -59,6 +59,7 @@ function Singers(props: any) {
     } else if (!singerList.length) {
       dispatch(actionTypes.getHotSingerList());
     }
+    // eslint-disable-next-line
   }, []);
 
   // 点击具体分类的处理

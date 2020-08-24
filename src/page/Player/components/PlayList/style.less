@@ -1,12 +1,30 @@
 @import "../../../../global.less";
 
+.listFadeEnter {
+  opacity: 0;
+}
+
+.listFadeEnterActive {
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.listFadeExit {
+  opacity: 1;
+}
+
+.listFadeExitActive {
+  opacity: 0;
+  transition: all 0.3s;
+}
+
 .PlayListWrapper {
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 1000;
+  z-index: 1001;
   background-color: @background-color-shadow;
 
   .list_wrapper {
@@ -18,6 +36,37 @@
     border-radius: 10px 10px 0 0;
     background-color: @highlight-background-color;
     transform: translate3d(0, 0, 0);
+
+    .ListHeader {
+      position: relative;
+      padding: 20px 30px 10px 20px;
+
+      .title {
+        display: flex;
+        align-items: center;
+
+        >div {
+          flex: 1;
+
+          .text {
+            flex: 1;
+            font-size: @font-size-m;
+            color: @font-color-desc;
+          }
+        }
+
+        .iconfont {
+          margin-right: 10px;
+          font-size: @font-size-ll;
+          color: @theme-color;
+        }
+
+        .clear {
+          .extendClick;
+          font-size: @font-size-l;
+        }
+      }
+    }
 
     .list_close {
       text-align: center;
@@ -31,5 +80,46 @@
   .ScrollWrapper {
     height: 400px;
     overflow: hidden;
+
+    .ListContent {
+      .item {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        padding: 0 30px 0 20px;
+        overflow: hidden;
+
+        .current {
+          flex: 0 0 20px;
+          width: 20px;
+          font-size: @font-size-s;
+          color: @theme-color;
+        }
+
+        .text {
+          flex: 1;
+          .noWrap;
+          font-size: font-size-m;
+          color: @font-color-desc-v2;
+
+          .icon-favorite {
+            color: @theme-color;
+          }
+        }
+
+        .like {
+          .extendClick;
+          margin-right: 15px;
+          font-size: @font-size-m;
+          color: @theme-color;
+        }
+
+        .delete {
+          .extendClick;
+          font-size: @font-size-s;
+          color: @theme-color;
+        }
+      }
+    }
   }
 }

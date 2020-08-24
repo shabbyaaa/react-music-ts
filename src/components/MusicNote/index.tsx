@@ -1,3 +1,10 @@
+/*
+ * @Author: Shabby申 
+ * @Date: 2020-08-24 10:38:28 
+ * @Last Modified by: Shabby申
+ * @Last Modified time: 2020-08-24 10:41:08
+ * 音乐符号动画组件
+ */
 import React, {
   useEffect,
   useImperativeHandle,
@@ -26,7 +33,8 @@ const MusicNote = forwardRef((props, ref) => {
     const nodeRef = iconsRef.current!;
     for (let i = 0; i < ICON_NUMBER; i++) {
       let node = createNode(
-        `<div>${<MyIcon type="iconiconfontyuleyinle" />}</div>`
+        // `<div>${<MyIcon type="iconiconfontyuleyinle" />}</div>`
+        `<div></div>`
       )!;
       nodeRef.appendChild(node);
     }

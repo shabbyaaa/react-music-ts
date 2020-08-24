@@ -1,0 +1,84 @@
+@import "../../global.less";
+
+@keyframes confirmFadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes confirmZoom {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.ConfirmWrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1002;
+  background: @background-color-shadow;
+
+  &.confirm-fade-enter-active {
+    animation: confirmFadeIn 0.3s;
+
+    .confirm_content {
+      animation: confirmZoom 0.3s
+    }
+  }
+
+  >div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    z-index: 100;
+
+    .confirm_content {
+      width: 270px;
+      border-radius: 13px;
+      background: @highlight-background-color;
+
+      .text {
+        padding: 19px 15px;
+        line-height: 22px;
+        text-align: center;
+        font-size: @font-size-l;
+        color: @font-color-desc-v2;
+      }
+
+      .operate {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-size: @font-size-l;
+
+        .operate_btn {
+          flex: 1;
+          line-height: 22px;
+          padding: 10px 0;
+          border-top: 1px solid @border-color;
+          color: @font-color-desc;
+
+          &.left {
+            border-right: 1px solid @border-color;
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,21 +2,21 @@
  * @Author: Shabby申
  * @Date: 2020-08-21 20:35:46
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-23 22:35:42
+ * @Last Modified time: 2020-08-24 17:10:11
  * 歌曲列表
  */
 import React, { forwardRef, memo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getName, getCount } from "../../utils/utils";
 import { MyIcon } from "../../utils/request";
-import { RootState } from "../../store";
+// import { RootState } from "../../store";
 import * as actionTypes from "../../page/Player/store/action";
 import styles from "./style.less";
 
 const SongsList = forwardRef((props: any, refs) => {
   const dispatch = useDispatch();
 
-  const {} = useSelector((state: RootState) => ({}));
+  // const {} = useSelector((state: RootState) => ({}));
 
   // 接受触发动画的函数
   const { musicAnimation, showBackground } = props;

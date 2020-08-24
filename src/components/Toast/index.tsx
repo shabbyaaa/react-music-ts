@@ -2,12 +2,10 @@
  * @Author: Shabby申
  * @Date: 2020-08-23 18:44:39
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-23 18:51:22
+ * @Last Modified time: 2020-08-24 17:10:25
  * 播放模式的文字提示
  */
 import React, {
-  ReactElement,
-  memo,
   useState,
   useImperativeHandle,
   forwardRef,

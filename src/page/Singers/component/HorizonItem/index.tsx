@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, memo } from "react";
+import React, { useRef, useEffect, memo } from "react";
 import Scroll from "../../../../components/Scroll";
 import styles from "./style.less";
 

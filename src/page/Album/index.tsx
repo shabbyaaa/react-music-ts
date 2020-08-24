@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-21 13:01:42
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-23 23:24:00
+ * @Last Modified time: 2020-08-24 17:08:53
  * 具体歌单页面
  */
 import React, { memo, useState, useRef, useEffect, useCallback } from "react";
@@ -41,6 +41,7 @@ function Alibum(props: any) {
   useEffect(() => {
     dispatch(actionTypes.changeEnterLoading(true));
     dispatch(actionTypes.getAlbumList(id));
+    // eslint-disable-next-line
   }, [id]);
 
   const handleBack = useCallback(() => {

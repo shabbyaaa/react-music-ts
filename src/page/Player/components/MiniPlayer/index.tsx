@@ -13,7 +13,6 @@ function MiniPlayer(props: any) {
     playing,
     percent,
     clickPlaying,
-    setFullScreen,
     togglePlayList,
   } = props;
 

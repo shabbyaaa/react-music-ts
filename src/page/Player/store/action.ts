@@ -1,6 +1,5 @@
-import { Dispatch } from 'redux';
 import * as actionTypes from './actionType';
-import request from '../../../utils/request';
+
 
 
 export const changeCurrentSong = (data: any) => ({
@@ -40,5 +39,10 @@ export const changeCurrentIndex = (data: number) => ({
 
 export const changeShowPlayList = (data: boolean) => ({
   type: actionTypes.SET_SHOW_PLAYLIST,
+  data: data
+});
+
+export const deleteSong = (data: any) => ({
+  type: actionTypes.DELETE_SONG,
   data: data
 });

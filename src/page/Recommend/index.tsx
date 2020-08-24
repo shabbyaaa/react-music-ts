@@ -63,4 +63,4 @@ const Recommend = (props: any) => {
   );
 };
 
-export default withRouter(React.memo(Recommend));
+export default withRouter(memo(Recommend));

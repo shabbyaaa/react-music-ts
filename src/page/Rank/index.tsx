@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-20 18:10:09
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-23 23:20:31
+ * @Last Modified time: 2020-08-24 17:05:46
  * 排行榜页面
  */
 import React, { useEffect } from "react";
@@ -33,6 +33,7 @@ function Rank(props: any) {
 
   useEffect(() => {
     dispatch(actionTypes.getRankList());
+    // eslint-disable-next-line
   }, []);
 
   const enterDetail = (detail: any) => {

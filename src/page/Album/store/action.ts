@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux';
 import * as actionTypes from './actionType';
 import request from '../../../utils/request';
-import { ICurrentAlbumType } from './reducer';
 
 const changeCurrentAlbum = (data: any) => ({
   type: actionTypes.CHANGE_CURRENT_ALBUM,
