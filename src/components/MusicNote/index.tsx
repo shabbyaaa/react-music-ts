@@ -1,8 +1,8 @@
 /*
- * @Author: Shabby申 
- * @Date: 2020-08-24 10:38:28 
+ * @Author: Shabby申
+ * @Date: 2020-08-24 10:38:28
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-24 10:41:08
+ * @Last Modified time: 2020-08-24 17:28:36
  * 音乐符号动画组件
  */
 import React, {
@@ -13,7 +13,8 @@ import React, {
 } from "react";
 import { prefixStyle } from "../../utils/utils";
 import { MyIcon } from "../../utils/request";
-import styles from "./style.less";
+// import styles from "./style.less";
+import "./iconfont.css";
 
 const MusicNote = forwardRef((props, ref) => {
   const iconsRef = useRef<HTMLDivElement>(null);
@@ -34,7 +35,7 @@ const MusicNote = forwardRef((props, ref) => {
     for (let i = 0; i < ICON_NUMBER; i++) {
       let node = createNode(
         // `<div>${<MyIcon type="iconiconfontyuleyinle" />}</div>`
-        `<div></div>`
+        `<div class="iconfont">&#xe63a;</div>`
       )!;
       nodeRef.appendChild(node);
     }
@@ -81,7 +82,7 @@ const MusicNote = forwardRef((props, ref) => {
     startAnimation,
   }));
 
-  return <div className={styles.Container} ref={iconsRef}></div>;
+  return <div className="Container" ref={iconsRef}></div>;
 });
 
 export default React.memo(MusicNote);
