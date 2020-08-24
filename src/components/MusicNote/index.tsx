@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-24 10:38:28
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-24 17:28:36
+ * @Last Modified time: 2020-08-24 17:31:26
  * 音乐符号动画组件
  */
 import React, {
@@ -12,8 +12,6 @@ import React, {
   forwardRef,
 } from "react";
 import { prefixStyle } from "../../utils/utils";
-import { MyIcon } from "../../utils/request";
-// import styles from "./style.less";
 import "./iconfont.css";
 
 const MusicNote = forwardRef((props, ref) => {
