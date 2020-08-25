@@ -41,6 +41,7 @@ function Search(props: any) {
   useEffect(() => {
     setShow(true);
     if (!hotList.size) getHotKeyWordsDispatch();
+    // eslint-disable-next-line
   }, []);
 
   const searchBack = useCallback(() => {

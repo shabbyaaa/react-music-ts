@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useMemo } from "react";
-import { debounce, noop } from "lodash";
+import { debounce } from "lodash";
 import { MyIcon } from "../../../../utils/request";
 import styles from "./style.less";
 
@@ -37,12 +37,14 @@ const SearchBox = (props: any) => {
   useEffect(() => {
     // 注意防抖
     handleQueryDebounce(query);
+    // eslint-disable-next-line
   }, [query]);
 
   useEffect(() => {
     if (newQuery !== query) {
       setQuery(newQuery);
     }
+    // eslint-disable-next-line
   }, [newQuery]);
 
   return (

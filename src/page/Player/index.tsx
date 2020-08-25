@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-22 11:10:24
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-24 22:31:34
+ * @Last Modified time: 2020-08-25 22:11:33
  * 播放器组件
  */
 import React, { useState, memo, useRef, useEffect } from "react";
@@ -16,12 +16,13 @@ import {
   findIndex,
 } from "../../utils/utils";
 import request from "../../utils/request";
+import Lyric from "../../utils/lyric-parser";
 import * as actionTypes from "./store/action";
 import MiniPlayer from "./components/MiniPlayer";
 import NormalPlayer from "./components/NormalPlayer";
 import PlayList from "./components/PlayList";
 import Toast from "../../components/Toast";
-import { fromPairs } from "lodash";
+// import { fromPairs } from "lodash";
 
 interface IProps {
   fullScreen?: boolean; // 播放器是否为全屏模式
@@ -69,6 +70,10 @@ function Player() {
   let percent = isNaN(currentTime / duration) ? 0 : currentTime / duration;
   //记录当前的歌曲，以便于下次重渲染时比对是否是一首歌
   const [preSong, setPreSong] = useState<any>({});
+  // 即时歌词
+  const [currentPlayingLyric, setPlayingLyric] = useState("");
+  // 当前行数
+  const currentLineNum = useRef(0);
 
   const [modeText, setModeText] = useState("");
 
@@ -80,6 +85,9 @@ function Player() {
   ) => {
     e.stopPropagation();
     togglePlayingDispatch(state);
+    if (currentLyric.current) {
+      currentLyric.current.togglePlay(currentTime * 1000);
+    }
   };
 
   // 处理播放和暂停的逻辑
@@ -115,8 +123,27 @@ function Player() {
     // eslint-disable-next-line
   }, [playList, currentIndex]);
 
+  const handleLyric = ({ lineNum, txt }: any) => {
+    if (!currentLyric.current) return;
+    currentLineNum.current = lineNum;
+    setPlayingLyric(txt);
+  };
+  // useEffect(() => {
+  //   if (!fullScreen) return;
+  //   if (currentLyric.current && currentLyric.current.lines.length) {
+  //     handleLyric({
+  //       lineNum: currentLineNum.current,
+  //       txt: currentLyric.current.lines[currentLineNum.current].txt,
+  //     });
+  //   }
+  // }, [fullScreen]);
+
+  // 获取歌词
   const getLyric = (id: number) => {
     let lyric = "";
+    if (currentLyric.current) {
+      currentLyric.current.stop();
+    }
     request(`/api/server/lyric?id=${id}`, "POST")
       .then((res: any) => {
         lyric = res.lrc.lyric;
@@ -124,6 +151,10 @@ function Player() {
           currentLyric.current! = null;
           return;
         }
+        currentLyric.current = new Lyric(lyric, handleLyric);
+        currentLyric.current.play();
+        currentLineNum.current = 0;
+        currentLyric.current.seek(0);
       })
       .catch(() => {
         songReady.current = true;
@@ -135,12 +166,16 @@ function Player() {
     setCurrentTime(e.target.currentTime);
   };
 
+  // 歌曲进度更新:
   const onProgressChange = (curPercent: any) => {
     const newTime = curPercent * duration;
     setCurrentTime(newTime);
     audioRef.current!.currentTime = newTime;
     if (!playing) {
       togglePlayingDispatch(true);
+    }
+    if (currentLyric.current) {
+      currentLyric.current.seek(newTime * 1000);
     }
   };
 
@@ -271,6 +306,9 @@ function Player() {
           mode={mode}
           changeMode={changeMode}
           togglePlayList={togglePlayListDispatch}
+          currentLyric={currentLyric.current}
+          currentPlayingLyric={currentPlayingLyric}
+          currentLineNum={currentLineNum.current}
         />
       )}
       <PlayList />

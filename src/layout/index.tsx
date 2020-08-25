@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-05-17 12:38:17
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-24 21:30:28
+ * @Last Modified time: 2020-08-25 22:12:40
  * @description: 布局样式
  */
 import React, { Component } from "react";
@@ -12,9 +12,6 @@ import styles from "./style.less";
 import Player from "../page/Player";
 
 class BasicLayout extends Component<RouteComponentProps> {
-  constructor(props: any) {
-    super(props);
-  }
   render() {
     return (
       <div>
