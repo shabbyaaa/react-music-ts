@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { Store } from "./store";
 import RouterConfig from "./route";
 import "antd/dist/antd.css";
-import "./index.less";
+import "./global.less";
 
 // 解决移动端300ms延迟（移动端的双击会缩放导致click判断延迟）
 // FastClick.attach(document.body);
