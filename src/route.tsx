@@ -8,6 +8,7 @@ import {
 import Layout from "./layout";
 import Loading from "./components/Loading1";
 
+// 实现组件懒加载 可提升首屏加载速度
 const SuspenseComponent = (Component: LazyExoticComponent<any>) => (
   props: any
 ) => (
