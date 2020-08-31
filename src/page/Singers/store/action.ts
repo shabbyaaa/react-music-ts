@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
+import request from '@utils/request';
 import * as actionTypes from './actionType';
-import request from '../../../utils/request';
 import { ISingerList } from './reducer';
 
 export const changeSingerList = (data: ISingerList) => ({
@@ -31,7 +31,7 @@ export const changePullDownLoading = (data: boolean) => ({
 //第一次加载热门歌手
 export const getHotSingerList = () => {
   return (dispatch: Dispatch) => {
-    request('/api/server/top/artists?offset=0', 'POST').then((res: any) => {
+    request('/api/server/top/artists?offset=0', 'POST').then(res => {
       dispatch(changeSingerList(res.artists));
       dispatch(changeEnterLoading(false));
       dispatch(changePullDownLoading(false));
@@ -44,7 +44,7 @@ export const getHotSingerList = () => {
 //加载更多热门歌手
 export const refreshMoreHotSingerList = (pageCount: number) => {
   return (dispatch: Dispatch) => {
-    request(`/api/server/top/artists?offset=${pageCount}`, 'POST').then((res: any) => {
+    request(`/api/server/top/artists?offset=${pageCount}`, 'POST').then(res => {
       dispatch(changeSingerList([...res.artists]));
       dispatch(changePullUpLoading(false));
     }).catch(() => {

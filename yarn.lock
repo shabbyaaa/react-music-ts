@@ -1124,6 +1124,74 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@better-scroll/core@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@better-scroll/core/download/@better-scroll/core-2.0.1.tgz#8e75b8aa55d91c6b73c4484dc701bd03d4cd194d"
+  integrity sha1-jnW4qlXZHGtzxEhNxwG9A9TNGU0=
+  dependencies:
+    "@better-scroll/shared-utils" "^2.0.1"
+
+"@better-scroll/mouse-wheel@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@better-scroll/mouse-wheel/download/@better-scroll/mouse-wheel-2.0.1.tgz#1924034996845b228a44e09bc2d9ecb8d8888e09"
+  integrity sha1-GSQDSZaEWyKKROCbwtnsuNiIjgk=
+  dependencies:
+    "@better-scroll/core" "^2.0.1"
+
+"@better-scroll/observe-dom@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@better-scroll/observe-dom/download/@better-scroll/observe-dom-2.0.1.tgz#519290752796372702bc0c5b2dfd1d6f3bb5736a"
+  integrity sha1-UZKQdSeWNycCvAxbLf0dbzu1c2o=
+  dependencies:
+    "@better-scroll/core" "^2.0.1"
+
+"@better-scroll/pull-down@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@better-scroll/pull-down/download/@better-scroll/pull-down-2.0.1.tgz#d60b9d3108dd2f4c8c9c97fed60472ccfb28b0d9"
+  integrity sha1-1gudMQjdL0yMnJf+1gRyzPsosNk=
+  dependencies:
+    "@better-scroll/core" "^2.0.1"
+
+"@better-scroll/pull-up@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@better-scroll/pull-up/download/@better-scroll/pull-up-2.0.1.tgz#c1541c1e53295d3ef3bdc5a9ccb75570ae65ce35"
+  integrity sha1-wVQcHlMpXT7zvcWpzLdVcK5lzjU=
+  dependencies:
+    "@better-scroll/core" "^2.0.1"
+
+"@better-scroll/scroll-bar@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@better-scroll/scroll-bar/download/@better-scroll/scroll-bar-2.0.1.tgz#6312905aa0c5ecf207d2325fc39ebda88f3fb9fb"
+  integrity sha1-YxKQWqDF7PIH0jJfw569qI8/ufs=
+  dependencies:
+    "@better-scroll/core" "^2.0.1"
+
+"@better-scroll/shared-utils@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@better-scroll/shared-utils/download/@better-scroll/shared-utils-2.0.1.tgz#937b0665576a3ed9a4075690ca6d291cc67b8773"
+  integrity sha1-k3sGZVdqPtmkB1aQym0pHMZ7h3M=
+
+"@better-scroll/slide@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@better-scroll/slide/download/@better-scroll/slide-2.0.1.tgz#0639eac4a33c4e3f890422690ff4f82f2a1b2e2c"
+  integrity sha1-BjnqxKM8Tj+JBCJpD/T4LyobLiw=
+  dependencies:
+    "@better-scroll/core" "^2.0.1"
+
+"@better-scroll/wheel@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@better-scroll/wheel/download/@better-scroll/wheel-2.0.1.tgz#6ec04fbaa0e75faebfa9f57783f9ef801e7a8c79"
+  integrity sha1-bsBPuqDnX66/qfV3g/nvgB56jHk=
+  dependencies:
+    "@better-scroll/core" "^2.0.1"
+
+"@better-scroll/zoom@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@better-scroll/zoom/download/@better-scroll/zoom-2.0.1.tgz#4c2c9426bc77239a9c42b2a7a0b5249026347af0"
+  integrity sha1-TCyUJrx3I5qcQrKnoLUkkCY0evA=
+  dependencies:
+    "@better-scroll/core" "^2.0.1"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
@@ -1584,11 +1652,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
   integrity sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
-
-"@types/fastclick@^1.0.29":
-  version "1.0.29"
-  resolved "https://registry.npm.taobao.org/@types/fastclick/download/@types/fastclick-1.0.29.tgz#90f43082848187b42250620f13ec93e32393169b"
-  integrity sha1-kPQwgoSBh7QiUGIPE+yT4yOTFps=
 
 "@types/glob@^7.1.1":
   version "7.1.1"
@@ -2661,7 +2724,7 @@ babel-preset-react-app@^9.1.2:
     babel-plugin-macros "2.8.0"
     babel-plugin-transform-react-remove-prop-types "0.4.24"
 
-babel-runtime@^6.0.0, babel-runtime@^6.26.0:
+babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
@@ -2709,12 +2772,20 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-better-scroll@^1.15.2:
-  version "1.15.2"
-  resolved "https://registry.npm.taobao.org/better-scroll/download/better-scroll-1.15.2.tgz#65ffc6058b8b4ff337b8dfad4bcb334d7699ceb6"
-  integrity sha1-Zf/GBYuLT/M3uN+tS8szTXaZzrY=
+better-scroll@^2.0.0-beta.4:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/better-scroll/download/better-scroll-2.0.1.tgz?cache=0&sync_timestamp=1598536256436&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbetter-scroll%2Fdownload%2Fbetter-scroll-2.0.1.tgz#518fe2ccaf79ecb629d9ede327bee5ede46d758a"
+  integrity sha1-UY/izK957LYp2e3jJ77l7eRtdYo=
   dependencies:
-    babel-runtime "^6.0.0"
+    "@better-scroll/core" "^2.0.1"
+    "@better-scroll/mouse-wheel" "^2.0.1"
+    "@better-scroll/observe-dom" "^2.0.1"
+    "@better-scroll/pull-down" "^2.0.1"
+    "@better-scroll/pull-up" "^2.0.1"
+    "@better-scroll/scroll-bar" "^2.0.1"
+    "@better-scroll/slide" "^2.0.1"
+    "@better-scroll/wheel" "^2.0.1"
+    "@better-scroll/zoom" "^2.0.1"
 
 big.js@^5.2.2:
   version "5.2.2"
@@ -4806,11 +4877,6 @@ fast-levenshtein@~2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
-
-fastclick@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.npm.taobao.org/fastclick/download/fastclick-1.0.6.tgz#161625b27b1a5806405936bda9a2c1926d06be6a"
-  integrity sha1-FhYlsnsaWAZAWTa9qaLBkm0Gvmo=
 
 faye-websocket@^0.10.0:
   version "0.10.0"
@@ -9543,11 +9609,6 @@ react-error-overlay@^6.0.7:
   version "6.0.7"
   resolved "https://registry.npm.taobao.org/react-error-overlay/download/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha1-Hc+0WatnHVP2YKmRUTyy8KBVMQg=
-
-react-fastclick@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.npm.taobao.org/react-fastclick/download/react-fastclick-3.0.2.tgz#2994c60088cda90b0b2cbfac4b6e7c6bc73d6a3a"
-  integrity sha1-KZTGAIjNqQsLLL+sS258a8c9ajo=
 
 react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   version "16.13.1"

@@ -2,23 +2,31 @@
  * @Author: Shabby申
  * @Date: 2020-08-19 14:54:41
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-24 17:09:48
+ * @Last Modified time: 2020-08-31 19:29:06
  * 歌手分类组件
+ * @params playList 播放列表的长度 根据此判断底部迷你播放器是否出现
  */
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, ReactNode } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import LazyLoad, { forceCheck } from "react-lazyload";
 import { withRouter } from "react-router-dom";
-import { categoryTypes, alphaTypes } from "../../assets/static";
-import Scroll from "../../components/Scroll";
-import Loading from "../../components/Loading2";
+import { RouteConfigComponentProps } from "react-router-config";
+import { categoryTypes, alphaTypes } from "@assets/static";
+import Scroll from "@components/Scroll";
+import Loading from "@components/Loading2";
+import LocalStore from "@utils/LocalStore";
+import { RootState } from "@/store";
 import Horizen from "./component/HorizonItem";
-import LocalStore from "../../utils/LocalStore";
 import * as actionTypes from "./store/action";
-import { RootState } from "../../store";
+import { ISingerListType } from "./store/reducer";
 import styles from "./style.less";
 
-function Singers(props: any) {
+interface ISingersProps {
+  children?: ReactNode;
+  history: RouteConfigComponentProps["history"];
+}
+
+function Singers(props: ISingersProps) {
   const dispatch = useDispatch();
   const {
     singerList,
@@ -40,13 +48,15 @@ function Singers(props: any) {
   let [category, setCategory] = useState(LocalStore.get("category") || "");
   let [alpha, setAlpha] = useState(LocalStore.get("alpha") || "");
 
-  let handleUpdateCatetory = (val: string) => {
+  // 分类的点击事件
+  const handleUpdateCatetory = (val: string) => {
     setCategory(val);
     LocalStore.set("category", val);
     updateDispatch(val, alpha);
   };
 
-  let handleUpdateAlpha = (val: string) => {
+  // 首字母的点击事件
+  const handleUpdateAlpha = (val: string) => {
     setAlpha(val);
     LocalStore.set("alpha", val);
     updateDispatch(category, val);
@@ -99,14 +109,17 @@ function Singers(props: any) {
     }
   };
 
+  // 上拉触发的事件
   const handlePullUp = () => {
     pullUpRefreshDispatch(category, alpha, category === "", pageCount);
   };
 
+  // 下拉触发的事件
   const handlePullDown = () => {
     pullDownRefreshDispatch(category, alpha);
   };
 
+  // 具体歌手的点击事件
   const enterDetail = (id: number) => {
     props.history.push(`/singers/${id}`);
   };
@@ -114,7 +127,7 @@ function Singers(props: any) {
   const renderSingerList = () => {
     return (
       <div className={styles.list}>
-        {singerList.map((item: any) => {
+        {singerList.map((item: ISingerListType) => {
           return (
             <div
               className={styles.listItem}

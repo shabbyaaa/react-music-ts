@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-08-31 10:25:34
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-31 15:27:53
+ * @Last Modified time: 2020-08-31 18:47:08
  * 不弹射项目 修改webpack的默认配置 使用craco插件
  */
 const CracoLessPlugin = require("craco-less");
@@ -18,6 +18,7 @@ module.exports = {
       "@components": path.resolve(__dirname, "./src/components"),
       "@page": path.resolve(__dirname, "./src/page"),
       "@utils": path.resolve(__dirname, "./src/utils"),
+      "@assets": path.resolve(__dirname, "./src/assets"),
     },
     plugins: [
       //显示启动和打包进度条

@@ -23,6 +23,7 @@
 
       .img_wrapper {
         position: relative;
+        // 设置height为0 用padding-bottom设置百分比（相对于父元素的宽度设置）可以得到一个宽高1：1的容器
         height: 0;
         padding-bottom: 100%;
 
@@ -33,7 +34,7 @@
           width: 100%;
           height: 35px;
           border-radius: 3px;
-          background: linear-gradient(hsla(0, 0%, 43%, .4), hsla(0, 0%, 100%, 0));
+          background: linear-gradient(hsla(0, 0%, 43%, .8), hsla(0, 0%, 100%, 0));
         }
 
         img {
@@ -53,6 +54,7 @@
 
           .iconfont {
             vertical-align: top;
+            margin-right: 2px;
           }
         }
       }

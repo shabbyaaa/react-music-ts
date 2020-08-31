@@ -1,16 +1,29 @@
-import React, { useEffect, memo } from "react";
+/*
+ * @Author: Shabby申
+ * @Date: 2020-08-31 16:29:58
+ * @Last Modified by: Shabby申
+ * @Last Modified time: 2020-08-31 17:24:55
+ * @params playList 根据播放列表的长度判断页面底部迷你播放器是否出现
+ */
+import React, { useEffect, memo, ReactNode } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { forceCheck } from "react-lazyload";
 import { withRouter } from "react-router-dom";
-import Slider from "../../components/Slider";
+import { RouteConfigComponentProps } from "react-router-config";
+import Scroll from "@components/Scroll";
+import Loading from "@components/Loading1";
+import { RootState } from "@/store";
 import List from "./components/List";
-import Scroll from "../../components/Scroll";
-import Loading from "../../components/Loading1";
+import Slider from "./components/Slider";
 import * as actionTypes from "./store/action";
-import { RootState } from "../../store";
 import styles from "./style.less";
 
-const Recommend = (props: any) => {
+interface IRecommendProps {
+  children?: ReactNode;
+  history: RouteConfigComponentProps["history"];
+}
+
+const Recommend = (props: IRecommendProps) => {
   const dispatch = useDispatch();
   const { bannerList, recommendList, enterLoading, playList } = useSelector(
     (state: RootState) => ({

@@ -2,8 +2,18 @@ import * as actionTypes from './actionType';
 import { produce } from 'immer';
 import { AnyAction } from 'redux';
 
-interface IRankListType {
+export interface ITracksType {
+  first: string;
+  second: string;
+  [propname: string]: any;
+}
 
+export interface IRankListType {
+  id: number;
+  updateFrequency: string;
+  coverImgUrl: string;
+  tracks: ITracksType;
+  [propname: string]: any;
 }
 
 export type IRankList = IRankListType[];

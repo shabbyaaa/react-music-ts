@@ -37,7 +37,6 @@ const HorizonItem: React.FC<IProps> = (props) => {
           <span>{title}</span>
           {list.map((item) => (
             <span
-              // className={`listItem ${oldVal === item.key ? "selected" : ""}`}
               className={`${styles.listItem} ${
                 oldVal === item.key ? styles.selected : ""
               }`}

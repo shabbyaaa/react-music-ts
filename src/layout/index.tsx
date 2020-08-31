@@ -2,7 +2,7 @@
  * @Author: Shabby申
  * @Date: 2020-05-17 12:38:17
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-25 22:12:40
+ * @Last Modified time: 2020-08-31 10:17:19
  * @description: 布局样式
  */
 import React, { Component } from "react";
@@ -14,12 +14,13 @@ import Player from "../page/Player";
 class BasicLayout extends Component<RouteComponentProps> {
   render() {
     return (
-      <div>
+      <>
         <div className={styles.topWrap}>
           <span>
             <MyIcon type="iconcaidan" className={styles.iconfont} />
           </span>
           <span>云音乐</span>
+          {/* 搜索按钮 => 触发事件 */}
           <span>
             <MyIcon
               onClick={() => this.props.history.push("/search")}
@@ -41,7 +42,7 @@ class BasicLayout extends Component<RouteComponentProps> {
         </div>
         <Player />
         {this.props.children}
-      </div>
+      </>
     );
   }
 }

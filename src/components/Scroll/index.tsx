@@ -2,9 +2,10 @@
  * @Author: Shabby申
  * @Date: 2020-05-18 20:41:04
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-19 22:47:20
+ * @Last Modified time: 2020-08-31 23:24:58
  * @Description: 滑动组件
  * 滑动组件 需要一个父容器包裹，第一个子元素高度超过父容器，就会滑动
+ * 滑动原理 父组件容器的大小必须固定，当子元素超过父容器，通过transform动画产生滑动效果
  */
 import React, {
   forwardRef,
@@ -33,6 +34,11 @@ interface ScrollProps {
   bounceTop?: boolean; //是否支持向上吸顶
   bounceBottom?: boolean; //是否支持向下吸顶
   children: ReactNode;
+}
+
+export interface PosType {
+  x: number;
+  y: number;
 }
 
 const Scroll = forwardRef((props: ScrollProps, ref) => {
@@ -80,9 +86,9 @@ const Scroll = forwardRef((props: ScrollProps, ref) => {
 
   useEffect(() => {
     if (!bScroll || !onScroll) return;
-    bScroll.on("scroll", (scroll) => onScroll(scroll));
+    bScroll.on("scroll", onScroll);
     return () => {
-      bScroll.off("scroll", () => onScroll);
+      bScroll.off("scroll", onScroll);
     };
   }, [onScroll, bScroll]);
 
@@ -102,7 +108,7 @@ const Scroll = forwardRef((props: ScrollProps, ref) => {
 
   useEffect(() => {
     if (!bScroll || !pullDown) return;
-    const handlePullDown = (pos: any) => {
+    const handlePullDown = (pos: PosType) => {
       //判断用户的下拉动作
       if (pos.y > 50) {
         pullDownDebounce();

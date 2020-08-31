@@ -2,22 +2,22 @@
  * @Author: Shabby申
  * @Date: 2020-08-21 13:01:42
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-24 17:08:53
+ * @Last Modified time: 2020-08-31 21:43:52
  * 具体歌单页面
  */
 import React, { memo, useState, useRef, useEffect, useCallback } from "react";
 import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
-import { MyIcon } from "../../utils/request";
-import { HEADER_HEIGHT, isEmptyObject } from "../../utils/utils";
-import { RootState } from "../../store";
+import { MyIcon } from "@utils/request";
+import { HEADER_HEIGHT, isEmptyObject } from "@utils/utils";
+import { RootState } from "@/store";
+import Scroll from "@components/Scroll";
+import Loading from "@components/Loading1";
+import Header from "@components/Header";
+import SongsList from "@components/SongList";
+import MusicNote from "@components/MusicNote";
 import * as actionTypes from "./store/action";
-import Scroll from "../../components/Scroll";
-import Loading from "../../components/Loading1";
-import Header from "../../components/Header";
-import SongsList from "../../components/SongList";
-import MusicNote from "../../components/MusicNote";
 import styles from "./style.less";
 
 function Alibum(props: any) {

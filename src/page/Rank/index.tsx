@@ -2,19 +2,21 @@
  * @Author: Shabby申
  * @Date: 2020-08-20 18:10:09
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-24 17:05:46
+ * @Last Modified time: 2020-08-31 20:29:09
  * 排行榜页面
  */
-import React, { useEffect } from "react";
+import React, { useEffect, ReactNode } from "react";
 import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store";
+import { RouteConfigComponentProps } from "react-router-config";
+import Scroll from "@components/Scroll";
+import { RootState } from "@/store";
 import * as actionTypes from "./store/action";
-import Scroll from "../../components/Scroll";
+import { ITracksType, IRankList, IRankListType } from "./store/reducer";
 import styles from "./style.less";
 
 // tracks 有数组代表是官方榜 找到最后一个含有tracks的索引
-function filterIndex(rankList: any) {
+function filterIndex(rankList: IRankList) {
   for (let i = 0; i < rankList.length - 1; i++) {
     if (rankList[i].tracks.length && !rankList[i + 1].tracks.length) {
       return i + 1;
@@ -22,7 +24,12 @@ function filterIndex(rankList: any) {
   }
 }
 
-function Rank(props: any) {
+interface IRankProps {
+  children?: ReactNode;
+  history: RouteConfigComponentProps["history"];
+}
+
+function Rank(props: IRankProps) {
   const dispatch = useDispatch();
 
   const { rankList, loading, playList } = useSelector((state: RootState) => ({
@@ -36,24 +43,25 @@ function Rank(props: any) {
     // eslint-disable-next-line
   }, []);
 
-  const enterDetail = (detail: any) => {
-    props.history.push(`/rank/${detail.id}`);
+  const enterDetail = (id: number) => {
+    props.history.push(`/rank/${id}`);
   };
 
+  // 对rankList进行分类 分为官方榜和全球榜
   let globalStartIndex = filterIndex(rankList);
   let officialList = rankList.slice(0, globalStartIndex);
   let globalList = rankList.slice(globalStartIndex);
 
-  const renderRankList = (list: any, global?: boolean) => {
+  const renderRankList = (list: IRankList, global?: boolean) => {
     return (
       <ul className={styles.List} style={{ display: global ? "flex" : "" }}>
-        {list.map((item: any) => {
+        {list.map((item: IRankListType) => {
           return (
             <li
               className={styles.ListItem}
               key={item.id}
               style={{ display: item.tracks.length ? "flex" : "" }}
-              onClick={() => enterDetail(item)}
+              onClick={() => enterDetail(item.id)}
             >
               <div
                 className={styles.img_wrapper}
@@ -76,10 +84,10 @@ function Rank(props: any) {
     );
   };
 
-  const renderSongList = (list: any) => {
+  const renderSongList = (list: ITracksType) => {
     return list.length ? (
       <ul className={styles.SongList}>
-        {list.map((item: any, index: number) => {
+        {list.map((item: ITracksType, index: number) => {
           return (
             <li key={index}>
               {index + 1}. {item.first} - {item.second}

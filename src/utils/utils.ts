@@ -2,8 +2,9 @@
  * @Author: Shabby申 
  * @Date: 2020-05-21 22:20:22 
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-23 18:35:50
+ * @Last Modified time: 2020-08-31 17:21:43
  * @Description 公共方法
+ * @params getCount 对数量进行计算 加上相应的汉字
  */
 export const getCount = (count: number): string | number => {
   if (count < 0) return 0;

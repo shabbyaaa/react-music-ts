@@ -1,24 +1,33 @@
 import React from "react";
 import LazyLoad from "react-lazyload";
-import { MyIcon } from "../../../../utils/request";
-import { getCount } from "../../../../utils/utils";
+import { MyIcon } from "@utils/request";
+import { getCount } from "@utils/utils";
+import { IRcommendList, IRecommendType } from "../../store/reducer";
 import styles from "./style.less";
 
-function List(props: any) {
+interface IListProps {
+  enterDetail: Function;
+  recommendList: IRcommendList;
+}
 
+function List({ recommendList, enterDetail }: IListProps) {
   return (
     <div className={styles.ListWraper}>
       <h1 className={styles.title}>推荐歌单</h1>
       <div className={styles.list}>
-        {props.recommendList.map((item: any) => {
+        {recommendList.map((item: IRecommendType) => {
           return (
             <div
               className={styles.listItem}
               key={item.id}
-              onClick={() => props.enterDetail(item.id)}
+              onClick={() => enterDetail(item.id)}
             >
               <div className={styles.img_wrapper}>
+
+                {/* 给图片上方加一个遮罩 防止白色字体在白色背景下不显示 */}
                 <div className={styles.decorate}></div>
+
+                {/* LazyLoad 图片懒加载插件 */}
                 <LazyLoad
                   placeholder={
                     <img
@@ -38,10 +47,10 @@ function List(props: any) {
                 </LazyLoad>
 
                 <div className={styles.play_count}>
-                  <MyIcon className={styles.iconfont} type="iconerji" />
-                  <span className={styles.count}>
-                    {getCount(item.playCount)}
+                  <span>
+                    <MyIcon className={styles.iconfont} type="iconerji" />
                   </span>
+                  {getCount(item.playCount)}
                 </div>
               </div>
               <div className={styles.desc}>{item.name}</div>

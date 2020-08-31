@@ -2,10 +2,11 @@ import * as actionTypes from './actionType';
 import { produce } from 'immer';
 import { AnyAction } from 'redux';
 
-interface ISingerListType {
+export interface ISingerListType {
   id: number;
   picUrl: string;
   name: string;
+  [propname: string]: any;
 }
 
 export type ISingerList = ISingerListType[];

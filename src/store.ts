@@ -26,6 +26,7 @@ const composeEnhancers = (window as windowWithReduxExtension).__REDUX_DEVTOOLS_E
 
 const middlewares = [thunk];
 
+// redux-logger中间件 触发action事件时可在控制台上打印
 // if (process.env.NODE_ENV === 'development') {
 //   middlewares.push(require('redux-logger').createLogger())
 // }

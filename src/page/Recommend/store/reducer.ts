@@ -5,14 +5,17 @@ import { AnyAction } from 'redux';
 interface IBannerType {
   imageUrl: string;
   url: string;
+  targetId: number;
+  [propName: string]: any;
 }
 
-interface IRecommendType {
+export interface IRecommendType {
   id: string;
   name: string;
   picUrl: string;
   trackCount: number;
   playCount: number;
+  [propName: string]: any;
 }
 
 export type IBannerList = IBannerType[];

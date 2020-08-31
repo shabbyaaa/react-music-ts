@@ -2,21 +2,20 @@
  * @Author: Shabby申
  * @Date: 2020-05-18 18:29:26
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-19 19:12:19
- * @Description: 轮播图组件
+ * @Last Modified time: 2020-08-31 18:44:03
+ * @Description: 轮播图组件 也可以使用antd的走马灯
  */
 import React, { useEffect, useState } from "react";
 import Swiper from "swiper";
-import "swiper/css/swiper.css"
-// import "swiper/swiper.less";
-import { IBannerList } from "../../page/Recommend/store/reducer";
+import { IBannerList } from "../../store/reducer";
+import "swiper/css/swiper.css";
 import styles from "./style.less";
 
 type SliderProps = {
   bannerList: IBannerList;
 };
 
-const Slider: React.FC<SliderProps> = ({ bannerList = [] }) => {
+const Slider: React.FC<SliderProps> = ({ bannerList }) => {
   const [sliderSwiper, setSliderSwiper] = useState<Swiper>();
 
   useEffect(() => {
@@ -36,6 +35,7 @@ const Slider: React.FC<SliderProps> = ({ bannerList = [] }) => {
 
   return (
     <div className={styles.sliderWrap}>
+      {/* 下拉的遮罩 在轮播图上面给个主题色的背景 防止往下滑出现白色背景 */}
       <div className={styles.before}></div>
       <div id="sliderContainer" className={styles.sliderContainer}>
         <div className="swiper-wrapper">
