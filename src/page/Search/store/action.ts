@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import * as actionTypes from './actionType';
-import request from '../../../utils/request';
+import request from '@utils/request';
 
 const changeHotKeyWords = (data: any) => ({
   type: actionTypes.SET_HOT_KEYWRODS,

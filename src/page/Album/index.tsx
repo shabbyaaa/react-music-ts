@@ -142,7 +142,7 @@ function Alibum(props: any) {
       appear={true} //第一次显示需要动画
       unmountOnExit //dom会被移除
       // 退出动画执行结束时跳转路由。
-      onExited={props.history.goBack}
+      onExited={props.history.goBack()}
     >
       <div
         className={styles.Container}

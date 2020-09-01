@@ -1,15 +1,22 @@
+/*
+ * @Author: Shabby申
+ * @Date: 2020-09-01 09:45:53
+ * @Last Modified by: Shabby申
+ * @Last Modified time: 2020-09-01 10:00:16
+ * 搜索页面组件
+ */
 import React, { useState, useEffect, memo, useCallback, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LazyLoad, { forceCheck } from "react-lazyload";
-import Scroll from "../../components/Scroll";
+import Scroll from "@components/Scroll";
+import Loading from "@components/Loading1";
+import MusicalNote from "@components/MusicNote";
+import { getName } from "@utils/utils";
+import { RootState } from "@/store";
 import SearchBox from "./component/SearchBox";
-import Loading from "../../components/Loading1";
-import MusicalNote from "../../components/MusicNote";
 import * as actionTypes from "./store/action";
-import { getName } from "../../utils/utils";
-import { RootState } from "../../store";
 import { getSongDetail } from "../Player/store/action";
 import styles from "./style.less";
 

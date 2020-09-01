@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useMemo } from "react";
 import { debounce } from "lodash";
-import { MyIcon } from "../../../../utils/request";
+import { MyIcon } from "@utils/request";
 import styles from "./style.less";
 
 const SearchBox = (props: any) => {

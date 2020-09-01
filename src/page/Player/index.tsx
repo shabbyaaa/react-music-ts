@@ -2,27 +2,27 @@
  * @Author: Shabby申
  * @Date: 2020-08-22 11:10:24
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-25 22:11:33
+ * @Last Modified time: 2020-09-01 09:42:45
  * 播放器组件
  */
 import React, { useState, memo, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store";
+import { message } from "antd";
+import { RootState } from "@/store";
 import {
   playMode,
   getSongUrl,
   isEmptyObject,
   shuffle,
   findIndex,
-} from "../../utils/utils";
-import request from "../../utils/request";
-import Lyric from "../../utils/lyric-parser";
+} from "@utils/utils";
+import request from "@utils/request";
+import Lyric from "@utils/lyric-parser";
 import * as actionTypes from "./store/action";
 import MiniPlayer from "./components/MiniPlayer";
 import NormalPlayer from "./components/NormalPlayer";
 import PlayList from "./components/PlayList";
-import Toast from "../../components/Toast";
-// import { fromPairs } from "lodash";
+import Toast from "@components/Toast";
 
 interface IProps {
   fullScreen?: boolean; // 播放器是否为全屏模式
@@ -128,15 +128,6 @@ function Player() {
     currentLineNum.current = lineNum;
     setPlayingLyric(txt);
   };
-  // useEffect(() => {
-  //   if (!fullScreen) return;
-  //   if (currentLyric.current && currentLyric.current.lines.length) {
-  //     handleLyric({
-  //       lineNum: currentLineNum.current,
-  //       txt: currentLyric.current.lines[currentLineNum.current].txt,
-  //     });
-  //   }
-  // }, [fullScreen]);
 
   // 获取歌词
   const getLyric = (id: number) => {
@@ -145,7 +136,7 @@ function Player() {
       currentLyric.current.stop();
     }
     request(`/api/server/lyric?id=${id}`, "POST")
-      .then((res: any) => {
+      .then((res) => {
         lyric = res.lrc.lyric;
         if (!lyric) {
           currentLyric.current! = null;
@@ -244,7 +235,7 @@ function Player() {
 
   const handleError = () => {
     songReady.current = true;
-    alert("播放出错");
+    message.error("播放出错，没有权限（会员专享）");
   };
 
   // 改变播放状态

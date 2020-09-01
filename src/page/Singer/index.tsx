@@ -2,21 +2,22 @@
  * @Author: Shabby申
  * @Date: 2020-08-21 19:59:30
  * @Last Modified by: Shabby申
- * @Last Modified time: 2020-08-23 23:18:33
+ * @Last Modified time: 2020-09-01 09:28:34
  * 具体歌手页面
  */
 import React, { useState, memo, useCallback, useRef, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Header from "../../components/Header";
-import Loading from "../../components/Loading1";
-import { MyIcon } from "../../utils/request";
-import { HEADER_HEIGHT, isEmptyObject } from "../../utils/utils";
-import { RootState } from "../../store";
-import Scroll from "../../components/Scroll";
-import SongsList from "../../components/SongList";
-import MusicNote from "../../components/MusicNote";
+import Header from "@components/Header";
+import Loading from "@components/Loading1";
+import { MyIcon } from "@utils/request";
+import { HEADER_HEIGHT, isEmptyObject } from "@utils/utils";
+import { RootState } from "@/store";
+import Scroll from "@components/Scroll";
+import SongsList from "@components/SongList";
+import MusicNote from "@components/MusicNote";
+import { PosType } from "@components/Scroll";
 import * as actionTypes from "./store/action";
 import styles from "./style.less";
 
@@ -31,6 +32,7 @@ function Singer(props: any) {
     })
   );
   const musicNoteRef = useRef<any>(null);
+  // 动画下落的触发
   const musicAnimation = (x: number, y: number) => {
     musicNoteRef.current!.startAnimation({ x, y });
   };
@@ -67,7 +69,7 @@ function Singer(props: any) {
     setShowStatus(false);
   }, []);
 
-  const handleScroll = useCallback((pos: any) => {
+  const handleScroll = useCallback((pos: PosType) => {
     let height = initialHeight.current;
     const newY = pos.y;
     const imageDOM = imageWrapper.current!;
